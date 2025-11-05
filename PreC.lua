@@ -72,16 +72,15 @@ Pre=string.gsub(Pre,BS.."([\n\r][^\n\r]-)[\n\r]",BS.."%1PULARlinhaAQUI")
 Pre=string.gsub(Pre,"(#[^\n\r]-)[\n\r]","%1PULARlinhaAQUI")
 Pre=string.gsub(Pre,"[\n\r]([^\n\r]-#)","PULARlinhaAQUI%1")
 Pre=string.gsub(Pre,"[\n\r]"," ")
-Pre=string.gsub(Pre,"JOGOdaVELHA","#")
 Pre=string.gsub(Pre,"PULARlinhaAQUI","\n")
 
 Pre=string.gsub(Pre,"(#[^\n\r]-)%s(%()","%1ESpaCO%2")
 
 Pre=string.gsub(Pre,"\t"," ")
+
 while string.find(Pre,"  ") do
 	Pre=string.gsub(Pre,"  "," ")
 end
-
 Normal={";","=","<",">","{","}",",","!","&","|","]"}
 for i=1,#Normal do
 	Pre=string.gsub(Pre,Normal[i].." ",Normal[i])
@@ -92,9 +91,11 @@ for i=1,#Especial do
 	Pre=string.gsub(Pre,"%"..Especial[i].." ",Especial[i])
 	Pre=string.gsub(Pre," ".."%"..Especial[i],Especial[i])
 end
+Pre=string.gsub(Pre,"([\n\r]) ","%1")
+Pre=string.gsub(Pre," ([\n\r])","%1")
+
 Pre=string.gsub(Pre,"ESpaCO"," ")
 
-Pre=string.gsub(Pre,"([\n\r]) ","%1")
 Pre=string.gsub(Pre,"([\n\r])[\n\r]","%1")
 
 Novo=io.open("Pre"..Arquivo,"w")
